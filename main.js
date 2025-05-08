@@ -1,7 +1,7 @@
 const searchBtn = document.querySelector('#search');
 const locationInput = document.querySelector('#location');
 const noradSatelliteCode = document.querySelector('#norad');
-
+const output = document.querySelector('#output');
 
 // const getAPIData = () =>{
 //     fetch()
@@ -29,8 +29,30 @@ searchBtn.addEventListener('click', ()=>{
         .then((rawResponse)=>{
             return rawResponse.json();
         })
-        .then((response)=>{
+        .then((response)=>{ 
             console.log(response);
+
+            output.innerHTML = `
+            
+            <table class='table'>
+    <thead class='thead'>
+      <tr class='table'>
+        <th>RISE</th>
+        <th>CULMINATION</th>
+        <th>SET</th>
+      </tr>
+    </thead>
+    <tbody class='tbody'>
+      <tr>
+        <td>${response[0].rise.utc_datetime}</td>
+        <td>${response[0].culmination.utc_datetime}</td>
+        <td>${response[0].set.utc_datetime}</td>
+      </tr>
+    </tbody>
+  </table>
+            
+            `
+
         })
 });
 
